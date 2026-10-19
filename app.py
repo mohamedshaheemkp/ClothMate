@@ -22,7 +22,7 @@ def reply(question, results):
         return f"Your shoulder width is {results['shoulder']} cm."
     
     elif "waist" in q:
-        return f"Your waist is {results['waist']} cm."
+        return f"Your waist is {results['waist']} cm flat, about {round(results['waist'] * 2, 1)} cm around."
         
     else:
         return "Try asking about the chest, length, shoulder, or waist."
@@ -55,7 +55,7 @@ else:
     steps = ["Card: top-left corner", "Card: top-right corner",
          "Card: bottom-left corner", "Card: bottom-right corner",
          "Chest: left armpit", "Chest: right armpit",
-         "Length: top (collar base)", "Length: bottom (hem)",
+         "Length: top (shoulder-neck point)", "Length: bottom (hem)",
          "Shoulder: left end", "Shoulder: right end",
          "Waist: left edge", "Waist: right edge"]
 
@@ -113,15 +113,17 @@ else:
             st.write("Waist width (flat):", waist_cm, "cm")
             st.write("Waist circumference (estimate):", round(waist_cm * 2, 1), "cm")
 
+            if waist_cm > chest_cm:
+                st.warning("Waist is wider than chest! Check your measurements.")
+
             results = {"chest": chest_cm, "length": length_cm, "shoulder": shoulder_cm, "waist": waist_cm}
-            name = st.text_input("Name this garment", "Blue polo")
+            name = st.text_input("Name this garment", "Garment")
 
             if st.button("Save garment"):
                 row = {"name": name, "chest": chest_cm, "length": length_cm, "shoulder": shoulder_cm, "waist": waist_cm}
                 st.session_state.wardrobe.append(row)
                 st.success("Saved!")
 
-            question = st.chat_input("Ask about your garment...")
             if len(st.session_state.wardrobe) > 0:
                 st.write("Saved garments")
                 st.table(st.session_state.wardrobe)
@@ -131,6 +133,9 @@ else:
                     csv_text += f"{row['name']},{row['chest']},{row['length']},{row['shoulder']},{row['waist']}\n"
 
                 st.download_button("Download wardrobe CSV", csv_text, "wardrobe.csv", "text/csv")
+            
+            question = st.chat_input("Ask about your garment...")
+            
             if question:
                 answer = reply(question, results)
                 st.session_state.chat.append(("user", question))
