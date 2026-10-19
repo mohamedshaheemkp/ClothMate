@@ -2,6 +2,10 @@
 
 A small Streamlit app that measures a flat-laid garment from a photo, using a bank card as a ruler, and lets you ask a rule-based chatbot about the results.
 
+Deployed in Streamlit 
+Link;
+https://clothmate-byshaheem.streamlit.app/
+
 ## What it does
 
 1. **Upload a photo** of a garment laid flat, taken from straight above, with a bank card next to it on the same surface.
