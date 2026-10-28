@@ -1,0 +1,19 @@
+{
+  "id": "mens_tshirt",
+  "gender": "men",
+  "category": "top",
+  "points": [
+    {"name": "chest_left",    "instruction": "Left armpit seam, where sleeve meets body"},
+    {"name": "chest_right",   "instruction": "Right armpit seam, where sleeve meets body"},
+    {"name": "neck_shoulder", "instruction": "Highest point of the shoulder seam next to the collar"},
+    {"name": "hem",           "instruction": "Bottom hem, straight below the neck-shoulder point"},
+    {"name": "shoulder_left", "instruction": "Left outer shoulder seam end"},
+    {"name": "shoulder_right","instruction": "Right outer shoulder seam end"}
+  ],
+  "measurements": [
+    {"name": "chest_width",  "from": "chest_left",    "to": "chest_right",    "circumference": true},
+    {"name": "length",       "from": "neck_shoulder", "to": "hem",            "circumference": false},
+    {"name": "shoulder",     "from": "shoulder_left", "to": "shoulder_right", "circumference": false}
+  ],
+  "ease_cm": {"slim": null, "regular": null, "loose": null}
+}
