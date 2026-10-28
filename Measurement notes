@@ -1,0 +1,43 @@
+# Tailor measurement notes (Task 2 evidence)
+
+**Status: draft v2.** Read in full: Utsav blouse guide and Utsav salwar kameez guide. Read as search excerpts only: sources 3-5. NOT reviewed: leader's YouTube/Facebook/Instagram videos, share.google links, LinkedIn post, men's guides, lingerie video. Add those before sign-off.
+
+## Sources
+1. Utsav Fashion, "Guide to Take Perfect Saree Blouse Measurements" (utsavfashion.com/blog/how-to/measure-saree-blouse), full page
+2. Utsav Fashion, "Measurement Guide: Tailor-Made Salwar Kameez" (utsavfashion.com/blog/how-to/measure-salwar-kameez), full page
+3. Lashkaraa, "How to measure yourself for a salwar kameez at home" (excerpt)
+4. Patna Women's College, Dept. of Fashion Designing, "How to take body measurements" (excerpt)
+5. Aza Fashions, "Indian ethnic wear size guide" (excerpt)
+
+## Upper body (blouse / kameez / kurti)
+| Tailor measurement | How it is taken | Src | Flat-garment equivalent |
+|---|---|---|---|
+| Bust | Fullest part of bust and widest part of back, tape horizontal all round | 1,2,3,4,5 | pit-to-pit x 2 |
+| Waist / "around above waist" | Natural waist; blouse: just above the waist; kameez: one finger above navel, firm not tight; or string settled at natural waist | 1,2,4,5 | waist width x 2 |
+| Hip | Fullest part of hips, an index finger fits between tape and body | 2,5 | hip width x 2 |
+| Shoulder width | One shoulder tip to the other, across the back | 1,3,5 | seam-to-seam |
+| Sleeve length | Edge of shoulder down the arm to the chosen end | 1,2,3,4 | shoulder seam to cuff |
+| Around arm | Fullest part of the bicep | 1,2 | not in spec yet |
+| Kameez/blouse length | From the **centre of the shoulder** straight down, tape passes over centre of bust | 1,2 | neck-shoulder point to hem (see note A) |
+| Front neck depth | Top of shoulder at neck joint down to where the neck ends | 1,2 | not in spec yet |
+| Back neck depth | Neck joint to centre of back, as deep as wanted | 1,2 | not in spec yet |
+| Armhole round | Listed for Punjabi-style kameez | 2 | not in spec yet |
+| Back length | Nape of neck to hem | 5 | needs back view |
+
+## Lower body (for trouser / salwar / churidar specs, not built yet)
+| Tailor measurement | How it is taken | Src |
+|---|---|---|
+| Waist | Around the stomach just above the upper hip bone | 2 |
+| Thigh | Fullest part of the thigh | 2 |
+| Knee | Around the knee, a little loose | 2 |
+| Calf | Largest part of the calf | 2 |
+| Around bottom / ankle | Opening of the trouser bottom | 2 |
+| Bottom length | Waist to desired length | 2 |
+
+## Notes and open items
+- **A. Length convention mismatch.** Tailors measure length from the centre of the shoulder. The spec uses the neck-shoulder (high point) point, which is what is visible on a flat garment. Ask the leader which convention the company's size charts use; the difference is a few cm and changes accuracy numbers.
+- **B. Ease.** Garment size minus body size. Source 2 only hints at it ("allow an index finger" for hip). No numbers found; values must come from a tailor or the leader. Left `null` in specs.
+- **C.** Hip level: sources say "fullest part"; no distance from the waist is given. Spec uses "widest point of the garment below the waist".
+- **D.** Sleeve length from a flat photo is a straight-line approximation of the along-the-arm measure.
+- **E.** Not capturable from one flat top-down photo: neck depths, armhole round, bicep, back length. Would need extra views or a different method.
+- Do not cite unknown mirror sites that host copies of a "Saree Blouse Measurement Chart" PDF.
