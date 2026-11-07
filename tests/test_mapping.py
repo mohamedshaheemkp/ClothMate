@@ -31,14 +31,14 @@ def photo(cm_point):
 def test_points_are_converted_back_to_real_cm():
     card_px = [photo(p) for p in CARD_CM]
     points_px = {name: photo(p) for name, p in TSHIRT_CM.items()}
-    result = to_cm_points(card_px, points_px)
+    result = to_cm_points(card_px, points_px, method="homography")
     assert result["chest_left"] == pytest.approx((14, 25), abs=1e-6)
 
 
 def test_tshirt_measurements_from_a_tilted_photo():
     card_px = [photo(p) for p in CARD_CM]
     points_px = {name: photo(p) for name, p in TSHIRT_CM.items()}
-    rows = {r["name"]: r for r in measure_garment(SPEC, card_px, points_px)}
+    rows = {r["name"]: r for r in measure_garment(SPEC, card_px, points_px, method="homography")}
     assert rows["shoulder"]["flat_cm"] == pytest.approx(48.0, abs=0.1)
     assert rows["length"]["flat_cm"] == pytest.approx(72.0, abs=0.1)
     assert rows["chest_width"]["flat_cm"] == pytest.approx(40.0, abs=0.1)
@@ -52,7 +52,6 @@ def test_missing_point_is_rejected():
         measure_garment(SPEC, card_px, {"chest_left": (100, 100)})
 
 
-
 def test_good_card_corners_pass():
     card_px = [photo(p) for p in CARD_CM]
     assert 1.0 < check_card_corners(card_px) < 2.5
@@ -63,3 +62,20 @@ def test_card_corners_in_wrong_order_are_rejected():
     shifted = card_px[1:] + card_px[:1]   # same corners, wrong starting corner
     with pytest.raises(ValueError):
         check_card_corners(shifted)
+
+
+def test_scale_method_on_a_straight_photo():
+    def straight(p):                      # photo from directly above: 1 cm = 20 pixels
+        return (p[0] * 20 + 100, p[1] * 20 + 50)
+
+    card_px = [straight(p) for p in CARD_CM]
+    points_px = {name: straight(p) for name, p in TSHIRT_CM.items()}
+    rows = {r["name"]: r for r in measure_garment(SPEC, card_px, points_px, method="scale")}
+    assert rows["chest_width"]["flat_cm"] == pytest.approx(40.0, abs=0.1)
+    assert rows["length"]["flat_cm"] == pytest.approx(72.0, abs=0.1)
+
+
+def test_unknown_method_is_rejected():
+    card_px = [photo(p) for p in CARD_CM]
+    with pytest.raises(ValueError):
+        to_cm_points(card_px, {}, method="magic")

@@ -118,7 +118,9 @@ def main():
     parser.add_argument("photo")
     parser.add_argument("spec")
     parser.add_argument("--fit", default="regular", choices=["slim", "regular", "loose"])
+    parser.add_argument("--method", default="homography", choices=["homography", "scale"])
     args = parser.parse_args()
+
 
     spec = load_spec(args.spec)
     steps = build_steps(spec)
@@ -131,7 +133,7 @@ def main():
     try:
         ratio = check_card_corners(card_corners)
         print(f"Card shape check: long/short ratio {ratio:.2f} (a real card is 1.59)")
-        rows = measure_garment(spec, card_corners, points, fit=args.fit)
+        rows = measure_garment(spec, card_corners, points, fit=args.fit, method=args.method)
     except ValueError as err:
         print(f"Cannot measure: {err}")
         return

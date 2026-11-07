@@ -24,28 +24,40 @@ def check_card_corners(card_corners_px):
     return seen_ratio
 
 
-def to_cm_points(card_corners_px, points_px):
+def to_cm_points(card_corners_px, points_px, method="scale"):
     """Convert clicked photo points into real centimetres on the table.
 
     card_corners_px: [top_left, top_right, bottom_right, bottom_left] in photo pixels
     points_px: {"point_name": (x, y), ...} in photo pixels
+    method: "scale"      one number (pixels per cm); best for photos taken from above
+            "homography" also corrects camera tilt; needs a LARGE reference object
     """
     width, height = CARD_SIZE_CM
-    card_cm = [(0, 0), (width, 0), (width, height), (0, height)]
-    h = compute_homography(card_corners_px, card_cm)
-    return {name: apply_homography(h, xy) for name, xy in points_px.items()}
+    tl, tr, br, bl = card_corners_px
+
+    if method == "scale":
+        scale = (distance(tl, tr) / width + distance(bl, br) / width
+                 + distance(tl, bl) / height + distance(tr, br) / height) / 4
+        return {name: (x / scale, y / scale) for name, (x, y) in points_px.items()}
+
+    if method == "homography":
+        card_cm = [(0, 0), (width, 0), (width, height), (0, height)]
+        h = compute_homography(card_corners_px, card_cm)
+        return {name: apply_homography(h, xy) for name, xy in points_px.items()}
+
+    raise ValueError(f"Unknown method: {method}")
 
 
-def measure_garment(spec, card_corners_px, points_px, fit="regular"):
+def measure_garment(spec, card_corners_px, points_px, fit="regular", method="scale"):
     """Return one result row per measurement defined in the garment spec."""
     needed = [p["name"] for p in spec["points"]]
     missing = [name for name in needed if name not in points_px]
     if missing:
         raise ValueError(f"Missing points for {spec['id']}: {missing}")
 
-    check_card_corners(card_corners_px)  # NEW LINE
+    check_card_corners(card_corners_px)
 
-    cm_points = to_cm_points(card_corners_px, points_px)
+    cm_points = to_cm_points(card_corners_px, points_px, method)
 
     results = []
     for m in spec["measurements"]:
