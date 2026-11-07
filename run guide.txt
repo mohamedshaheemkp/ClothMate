@@ -1,1 +1,5 @@
 venv\Scripts\Activate.ps1
+
+
+
+python -m tools.measure_photo dataset/images/IMG_20261016_113214.jpg specs/mens_tshirt.json

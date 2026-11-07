@@ -5,6 +5,8 @@ from pathlib import Path
 from core.homography import apply_homography
 from core.mapping import CARD_SIZE_CM, measure_garment, to_cm_points
 from core.specs import load_spec
+from core.mapping import check_card_corners
+
 
 SPEC = load_spec(Path(__file__).resolve().parent.parent / "specs" / "mens_tshirt.json")
 
@@ -48,3 +50,16 @@ def test_missing_point_is_rejected():
     card_px = [photo(p) for p in CARD_CM]
     with pytest.raises(ValueError):
         measure_garment(SPEC, card_px, {"chest_left": (100, 100)})
+
+
+
+def test_good_card_corners_pass():
+    card_px = [photo(p) for p in CARD_CM]
+    assert 1.0 < check_card_corners(card_px) < 2.5
+
+
+def test_card_corners_in_wrong_order_are_rejected():
+    card_px = [photo(p) for p in CARD_CM]
+    shifted = card_px[1:] + card_px[:1]   # same corners, wrong starting corner
+    with pytest.raises(ValueError):
+        check_card_corners(shifted)
