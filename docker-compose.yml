@@ -1,0 +1,16 @@
+services:
+  db:
+    image: postgres:16
+    container_name: clothmate-db
+    environment:
+      POSTGRES_DB: clothmate
+      POSTGRES_USER: clothmate
+      POSTGRES_PASSWORD: clothmate_dev
+    ports:
+      - "127.0.0.1:5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./db/schema.sql:/docker-entrypoint-initdb.d/01-schema.sql:ro
+
+volumes:
+  pgdata:
