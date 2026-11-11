@@ -1,0 +1,135 @@
+{
+  "id": "mens_pants",
+  "gender": "men",
+  "category": "bottom",
+  "display_name": "Men's pants / chinos",
+  "ease_profile": "trousers",
+  "points": [
+    {
+      "name": "waist_left",
+      "instruction": "Left end of the top edge of the waistband",
+      "required": true
+    },
+    {
+      "name": "waist_right",
+      "instruction": "Right end of the top edge of the waistband",
+      "required": true
+    },
+    {
+      "name": "waistband_center",
+      "instruction": "Centre of the top edge of the waistband (front)",
+      "required": true
+    },
+    {
+      "name": "crotch",
+      "instruction": "Crotch point: where the inner leg seams meet",
+      "required": true
+    },
+    {
+      "name": "hip_left",
+      "instruction": "Left outer side seam at the same height as the crotch point (seat line)",
+      "required": true
+    },
+    {
+      "name": "hip_right",
+      "instruction": "Right outer side seam at the same height as the crotch point",
+      "required": true
+    },
+    {
+      "name": "thigh_outer",
+      "instruction": "Left leg, outer seam, about 2.5 cm below the crotch point",
+      "required": true
+    },
+    {
+      "name": "thigh_inner",
+      "instruction": "Left leg, inner seam, at the same height as thigh_outer",
+      "required": true
+    },
+    {
+      "name": "knee_outer",
+      "instruction": "Left leg, outer seam at knee level (halfway between crotch and hem)",
+      "required": true
+    },
+    {
+      "name": "knee_inner",
+      "instruction": "Left leg, inner seam at the same height as knee_outer",
+      "required": true
+    },
+    {
+      "name": "hem_outer",
+      "instruction": "Left leg hem, outer corner",
+      "required": true
+    },
+    {
+      "name": "hem_inner",
+      "instruction": "Left leg hem, inner corner",
+      "required": true
+    }
+  ],
+  "measurements": [
+    {
+      "name": "waist",
+      "from": "waist_left",
+      "to": "waist_right",
+      "kind": "flat_circumference",
+      "tailor_measure": "Waist",
+      "ease_key": "waist"
+    },
+    {
+      "name": "hip",
+      "from": "hip_left",
+      "to": "hip_right",
+      "kind": "flat_circumference",
+      "tailor_measure": "Hip / seat",
+      "ease_key": "hip"
+    },
+    {
+      "name": "thigh",
+      "from": "thigh_outer",
+      "to": "thigh_inner",
+      "kind": "flat_circumference",
+      "tailor_measure": "Thigh",
+      "ease_key": "thigh"
+    },
+    {
+      "name": "knee",
+      "from": "knee_outer",
+      "to": "knee_inner",
+      "kind": "flat_circumference",
+      "tailor_measure": "Knee (garment only)",
+      "ease_key": null
+    },
+    {
+      "name": "bottom_opening",
+      "from": "hem_outer",
+      "to": "hem_inner",
+      "kind": "flat_circumference",
+      "tailor_measure": "Bottom opening (garment only)",
+      "ease_key": null
+    },
+    {
+      "name": "outseam",
+      "from": "waist_left",
+      "to": "hem_outer",
+      "kind": "straight",
+      "tailor_measure": "Outseam / pants length",
+      "ease_key": null
+    },
+    {
+      "name": "inseam",
+      "from": "crotch",
+      "to": "hem_inner",
+      "kind": "straight",
+      "tailor_measure": "Inseam",
+      "ease_key": null
+    },
+    {
+      "name": "rise",
+      "from": "crotch",
+      "to": "waistband_center",
+      "kind": "straight",
+      "tailor_measure": "Front rise",
+      "ease_key": null
+    }
+  ]
+}

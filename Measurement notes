@@ -24,15 +24,19 @@
 | Armhole round | Listed for Punjabi-style kameez | 2 | not in spec yet |
 | Back length | Nape of neck to hem | 5 | needs back view |
 
-## Lower body (for trouser / salwar / churidar specs, not built yet)
-| Tailor measurement | How it is taken | Src |
-|---|---|---|
-| Waist | Around the stomach just above the upper hip bone | 2 |
-| Thigh | Fullest part of the thigh | 2 |
-| Knee | Around the knee, a little loose | 2 |
-| Calf | Largest part of the calf | 2 |
-| Around bottom / ankle | Opening of the trouser bottom | 2 |
-| Bottom length | Waist to desired length | 2 |
+## Lower body (Pants / Trousers / Salwar / Churidar / Shorts)
+| Tailor measurement | How it is taken | Src | Flat-garment equivalent | Ease Profile (`trousers`) |
+|---|---|---|---|---|
+| Waist | Around the stomach just above the upper hip bone | 2 | waistband width x 2 | slim: 1 cm, regular: 2 cm, loose: 4 cm |
+| Hip / Seat | Fullest part of the hips / seat | 2, 5 | seat width x 2 (crotch level) | slim: 6 cm, regular: 10 cm, loose: 16 cm |
+| Thigh | Fullest part of the thigh | 2 | thigh width x 2 (2.5 cm below crotch) | slim: 6 cm, regular: 10 cm, loose: 16 cm |
+| Knee | Around the knee, a little loose | 2 | knee width x 2 (halfway crotch to hem) | garment only (ease = null) |
+| Around bottom / ankle | Opening of the trouser/pants bottom | 2 | hem width x 2 | garment only (ease = null) |
+| Outseam / Pants length | Top of waistband to hem along outer side | 2 | waist_left to hem_outer | garment length |
+| Inseam | Crotch seam down to inner hem | 2 | crotch to hem_inner | inner leg length |
+| Front rise | Crotch seam up to centre front waistband | 2 | crotch to waistband_center | vertical rise |
+
+*Status: Implemented in `specs/mens_pants.json`, `specs/womens_pants.json`, `specs/mens_trousers.json`, `specs/womens_trousers.json`, `specs/mens_shorts.json`, `specs/womens_shorts.json`, `specs/womens_leggings.json`.*
 
 ## Notes and open items
 - **A. Length convention mismatch.** Tailors measure length from the centre of the shoulder. The spec uses the neck-shoulder (high point) point, which is what is visible on a flat garment. Ask the leader which convention the company's size charts use; the difference is a few cm and changes accuracy numbers.
