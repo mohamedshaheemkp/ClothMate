@@ -1,12 +1,19 @@
-import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component } from '@angular/core';
+import { MeasureComponent } from './measure.component';
 
 @Component({
-  imports: [RouterOutlet],
   selector: 'app-root',
-  styleUrl: './app.css',
-  templateUrl: './app.html',
+  imports: [MeasureComponent],
+  template: `
+    <app-measure></app-measure>
+  `,
+  styles: [`
+    :host {
+      display: block;
+      padding: 24px;
+      background-color: #fcfcfc;
+      min-height: 100vh;
+    }
+  `],
 })
-export class App {
-  protected readonly title = signal('clothmate-web');
-}
+export class App {}
