@@ -1,0 +1,46 @@
+What We Know from Chats 1, 2, and 3
+
+We now have the complete story and timeline of your project:
+
+Chat 1 (Streamlit Prototype & Demo Prep):
+You built a manual click measurement tool in Streamlit using card-based calibration (
+8.56
+ cm
+8.56 cm) and Pythagoras math on the blue polo shirt (
+53
+ cm
+53 cm chest, 
+72
+ cm
+72 cm length, 
+48
+ cm
+48 cm shoulder).
+Core principle: Rule-based geometry rather than black-box ML, because auto-thresholding failed on 3 out of 4 photos due to shadows and floor contrast.
+Chat 2 (Team Leader's Voice Note & Enterprise Architecture):
+Task 1: Accuracy testing on men's & women's garments.
+Task 2: Research tailor vs. flat garment measurements, implementing an ease table (body measurement = flat circumference 
+−
+− ease).
+Task 3: Industry-ready 4-tier integration:
+Angular Frontend
+⟶
+Spring Boot Gateway
+⟶
+FastAPI CV Engine
+⟶
+PostgreSQL
+Angular Frontend⟶Spring Boot Gateway⟶FastAPI CV Engine⟶PostgreSQL
+Key security requirement: Photos stay in the browser (zero image upload).
+Chat 3 (Backend Verification Milestone):
+You successfully proved the entire backend:
+Python FastAPI (http://127.0.0.1:8000/health) 
+→
+→ OK.
+Spring Boot (http://localhost:8080/api/health) 
+→
+→ OK.
+POST /api/measure with request.json 
+→
+→ Returned measurements, generated a session ID, and persisted rows directly into PostgreSQL table measurement!
+You committed the scaffold on main.
