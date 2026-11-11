@@ -1,0 +1,189 @@
+{
+  "_status": "DRAFT typical garment-making ease values (cm). NOT validated by a tailor. Replace with values approved by the team leader / a tailor before relying on body estimates.",
+  "profiles": {
+    "knit_top": {
+      "slim": {
+        "chest": 4,
+        "waist": 6,
+        "hip": 6
+      },
+      "regular": {
+        "chest": 8,
+        "waist": 10,
+        "hip": 10
+      },
+      "loose": {
+        "chest": 14,
+        "waist": 16,
+        "hip": 16
+      }
+    },
+    "woven_shirt": {
+      "slim": {
+        "chest": 8,
+        "waist": 10,
+        "hip": 8
+      },
+      "regular": {
+        "chest": 12,
+        "waist": 16,
+        "hip": 14
+      },
+      "loose": {
+        "chest": 18,
+        "waist": 22,
+        "hip": 20
+      }
+    },
+    "kurta": {
+      "slim": {
+        "chest": 8,
+        "waist": 10,
+        "hip": 10
+      },
+      "regular": {
+        "chest": 12,
+        "waist": 16,
+        "hip": 16
+      },
+      "loose": {
+        "chest": 18,
+        "waist": 24,
+        "hip": 24
+      }
+    },
+    "jacket": {
+      "slim": {
+        "chest": 10,
+        "waist": 12,
+        "hip": 10
+      },
+      "regular": {
+        "chest": 14,
+        "waist": 18,
+        "hip": 16
+      },
+      "loose": {
+        "chest": 20,
+        "waist": 26,
+        "hip": 24
+      }
+    },
+    "womens_top": {
+      "slim": {
+        "bust": 4,
+        "waist": 6,
+        "hip": 6
+      },
+      "regular": {
+        "bust": 8,
+        "waist": 10,
+        "hip": 10
+      },
+      "loose": {
+        "bust": 14,
+        "waist": 18,
+        "hip": 16
+      }
+    },
+    "womens_kurti": {
+      "slim": {
+        "bust": 6,
+        "waist": 8,
+        "hip": 8
+      },
+      "regular": {
+        "bust": 10,
+        "waist": 14,
+        "hip": 14
+      },
+      "loose": {
+        "bust": 16,
+        "waist": 22,
+        "hip": 22
+      }
+    },
+    "blouse": {
+      "slim": {
+        "bust": 3,
+        "waist": 3,
+        "arm": 2
+      },
+      "regular": {
+        "bust": 5,
+        "waist": 5,
+        "arm": 4
+      },
+      "loose": {
+        "bust": 8,
+        "waist": 8,
+        "arm": 6
+      }
+    },
+    "womens_dress": {
+      "slim": {
+        "bust": 4,
+        "waist": 6,
+        "hip": 6
+      },
+      "regular": {
+        "bust": 8,
+        "waist": 12,
+        "hip": 10
+      },
+      "loose": {
+        "bust": 14,
+        "waist": 20,
+        "hip": 18
+      }
+    },
+    "skirt": {
+      "slim": {
+        "waist": 1,
+        "hip": 4
+      },
+      "regular": {
+        "waist": 2,
+        "hip": 8
+      },
+      "loose": {
+        "waist": 4,
+        "hip": 14
+      }
+    },
+    "trousers": {
+      "slim": {
+        "waist": 1,
+        "hip": 6,
+        "thigh": 6
+      },
+      "regular": {
+        "waist": 2,
+        "hip": 10,
+        "thigh": 10
+      },
+      "loose": {
+        "waist": 4,
+        "hip": 16,
+        "thigh": 16
+      }
+    },
+    "leggings": {
+      "slim": {
+        "waist": -10,
+        "hip": -10,
+        "thigh": -10
+      },
+      "regular": {
+        "waist": -8,
+        "hip": -8,
+        "thigh": -8
+      },
+      "loose": {
+        "waist": -6,
+        "hip": -6,
+        "thigh": -6
+      }
+    }
+  }
+}

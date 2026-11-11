@@ -1,73 +1,149 @@
-from core.geometry import distance
+"""Turn clicked points into garment and tailor (body) measurements."""
+import math
+
 from core.homography import apply_homography, compute_homography
-from core.units import body_from_garment, circumference_from_flat
 
-CARD_SIZE_CM = (8.56, 5.40)  # width (long edge) and height of a bank card
+# Real size in cm of the reference object. The "top" edge (top_left ->
+# top_right) is always the LONG edge.
+REFERENCE_OBJECTS = {
+    "card": (8.56, 5.40),   # ISO bank card
+    "a4": (29.7, 21.0),     # A4 sheet, landscape
+}
+
+MIN_SIDE_PX = 20          # reference corners closer than this are rejected
+MIN_VALUE_CM = 0.5        # two points almost on top of each other
+MAX_VALUE_CM = 300.0
+LOW_RES_CM_PER_PX = 0.08  # coarser than this: a 3 px click error ~ 0.24 cm
+TILT_WARN_RATIO = 1.15
+LARGE_GARMENT_CM = 70.0
 
 
-def check_card_corners(card_corners_px):
-    """Raise ValueError if the 4 clicked card corners cannot be a bank card."""
-    tl, tr, br, bl = card_corners_px
-    top, bottom = distance(tl, tr), distance(bl, br)
-    left, right = distance(tl, bl), distance(tr, br)
-    if min(top, bottom, left, right) < 20:
-        raise ValueError("Card corners are too close together")
-    seen_ratio = ((top + bottom) / 2) / ((left + right) / 2)
-    expected_ratio = CARD_SIZE_CM[0] / CARD_SIZE_CM[1]
-    if not (0.6 * expected_ratio <= seen_ratio <= 1.6 * expected_ratio):
+def _dist(a, b):
+    return math.dist(a, b)
+
+
+def check_reference_corners(corners, ref_w_cm, ref_h_cm):
+    """corners: [top_left, top_right, bottom_right, bottom_left] in pixels.
+    Raises ValueError if they cannot be the 4 corners of the reference.
+    Returns (top, bottom, left, right) side lengths in pixels."""
+    if len(corners) != 4:
+        raise ValueError("Exactly 4 reference corners are required")
+    for x, y in corners:
+        if not (math.isfinite(x) and math.isfinite(y)):
+            raise ValueError("Reference corners must be finite numbers")
+
+    tl, tr, br, bl = corners
+    top, bottom = _dist(tl, tr), _dist(bl, br)
+    left, right = _dist(tl, bl), _dist(tr, br)
+    if min(top, bottom, left, right) < MIN_SIDE_PX:
+        raise ValueError("Reference corners are too close together")
+
+    # Convex quadrilateral: cross products of consecutive edges share a sign.
+    signs = []
+    ring = [tl, tr, br, bl]
+    for i in range(4):
+        a, b, c = ring[i], ring[(i + 1) % 4], ring[(i + 2) % 4]
+        cross = (b[0] - a[0]) * (c[1] - b[1]) - (b[1] - a[1]) * (c[0] - b[0])
+        signs.append(cross)
+    if not (all(s > 0 for s in signs) or all(s < 0 for s in signs)):
         raise ValueError(
-            f"The card corners do not look like a bank card (long/short edge ratio "
-            f"{seen_ratio:.2f}, expected about {expected_ratio:.2f}). Click the corners "
-            f"in the order top-left, top-right, bottom-right, bottom-left, with the "
-            f"long edge as the top."
-        )
-    return seen_ratio
+            "Reference corners are in the wrong order. Click: top-left, "
+            "top-right, bottom-right, bottom-left")
+
+    expected = ref_w_cm / ref_h_cm
+    seen = ((top + bottom) / 2) / ((left + right) / 2)
+    if not (expected * 0.6 <= seen <= expected * 1.6):
+        raise ValueError(
+            "Reference corners do not match the reference shape. Check the "
+            "click order and that the long edge is the 'top' edge")
+    return top, bottom, left, right
 
 
-def to_cm_points(card_corners_px, points_px, method="scale"):
-    """Convert clicked photo points into real centimetres on the table.
-
-    card_corners_px: [top_left, top_right, bottom_right, bottom_left] in photo pixels
-    points_px: {"point_name": (x, y), ...} in photo pixels
-    method: "scale"      one number (pixels per cm); best for photos taken from above
-            "homography" also corrects camera tilt; needs a LARGE reference object
+def measure_garment(spec, ease_table, card_corners_px, points_px,
+                    fit="regular", reference="card"):
     """
-    width, height = CARD_SIZE_CM
-    tl, tr, br, bl = card_corners_px
+    spec:            one garment spec (dict from specs/*.json)
+    card_corners_px: [top_left, top_right, bottom_right, bottom_left] (x, y)
+    points_px:       {point_name: (x, y)} in the same pixel coordinates
+    Returns a dict with measurements, warnings and the scale.
+    """
+    if reference not in REFERENCE_OBJECTS:
+        raise ValueError("Unknown reference object")
+    if fit not in ("slim", "regular", "loose"):
+        raise ValueError("Unknown fit")
+    ref_w, ref_h = REFERENCE_OBJECTS[reference]
 
-    if method == "scale":
-        scale = (distance(tl, tr) / width + distance(bl, br) / width
-                 + distance(tl, bl) / height + distance(tr, br) / height) / 4
-        return {name: (x / scale, y / scale) for name, (x, y) in points_px.items()}
-
-    if method == "homography":
-        card_cm = [(0, 0), (width, 0), (width, height), (0, height)]
-        h = compute_homography(card_corners_px, card_cm)
-        return {name: apply_homography(h, xy) for name, xy in points_px.items()}
-
-    raise ValueError(f"Unknown method: {method}")
-
-
-def measure_garment(spec, card_corners_px, points_px, fit="regular", method="scale"):
-    """Return one result row per measurement defined in the garment spec."""
-    needed = [p["name"] for p in spec["points"]]
-    missing = [name for name in needed if name not in points_px]
+    # --- check the points match the spec -------------------------------
+    known = {p["name"]: p for p in spec["points"]}
+    unknown = sorted(set(points_px) - set(known))
+    if unknown:
+        raise ValueError(f"Unknown points for {spec['id']}: {unknown}")
+    missing = sorted(n for n, p in known.items()
+                     if p.get("required", True) and n not in points_px)
     if missing:
         raise ValueError(f"Missing points for {spec['id']}: {missing}")
 
-    check_card_corners(card_corners_px)
+    top, bottom, left, right = check_reference_corners(card_corners_px, ref_w, ref_h)
 
-    cm_points = to_cm_points(card_corners_px, points_px, method)
+    # --- pixels -> centimetres on the table surface ----------------------
+    plane_corners = [(0.0, 0.0), (ref_w, 0.0), (ref_w, ref_h), (0.0, ref_h)]
+    h = compute_homography(card_corners_px, plane_corners)
+    cm_points = {name: apply_homography(h, xy) for name, xy in points_px.items()}
 
+    warnings = []
+    cm_per_px = ref_w / max(top, bottom)
+    if cm_per_px > LOW_RES_CM_PER_PX:
+        warnings.append(
+            f"Low resolution: 1 pixel is about {cm_per_px:.2f} cm. Move the "
+            "camera closer or use a higher-resolution photo.")
+    tilt = max(max(top, bottom) / min(top, bottom),
+               max(left, right) / min(left, right))
+    if tilt > TILT_WARN_RATIO:
+        warnings.append(
+            "The camera looks tilted. It was corrected, but a photo taken "
+            "from directly above is more accurate.")
+    if len(cm_points) >= 2:
+        extent = max(_dist(a, b) for a in cm_points.values()
+                     for b in cm_points.values())
+        if reference == "card" and extent > LARGE_GARMENT_CM:
+            warnings.append(
+                "Large garment with a small reference object: accuracy "
+                "drops. Use an A4 sheet as the reference.")
+
+    # --- measurements -----------------------------------------------------
+    profile = ease_table["profiles"][spec["ease_profile"]][fit]
     results = []
     for m in spec["measurements"]:
-        flat = distance(cm_points[m["from"]], cm_points[m["to"]])
-        row = {"name": m["name"], "flat_cm": round(flat, 1)}
-        if m["circumference"]:
-            circ = circumference_from_flat(flat)
+        if m["from"] not in cm_points or m["to"] not in cm_points:
+            continue  # uses an optional point that was not given
+        flat = _dist(cm_points[m["from"]], cm_points[m["to"]])
+        if flat < MIN_VALUE_CM or flat > MAX_VALUE_CM:
+            raise ValueError(
+                f"'{m['name']}' came out as {flat:.1f} cm, which is not "
+                "plausible. Check the clicked points")
+        row = {
+            "name": m["name"],
+            "tailor_measure": m["tailor_measure"],
+            "flat_cm": round(flat, 1),
+            "garment_circumference_cm": None,
+            "ease_cm": None,
+            "estimated_body_cm": None,
+        }
+        if m["kind"] == "flat_circumference":
+            circ = flat * 2
             row["garment_circumference_cm"] = round(circ, 1)
-            ease = m.get("ease_cm", {}).get(fit)
-            if ease is not None:
-                row["estimated_body_cm"] = round(body_from_garment(circ, ease), 1)
+            if m.get("ease_key"):
+                ease = profile[m["ease_key"]]
+                row["ease_cm"] = ease
+                row["estimated_body_cm"] = round(circ - ease, 1)
         results.append(row)
-    return results
+
+    return {
+        "garment_id": spec["id"],
+        "fit": fit,
+        "reference": reference,
+        "cm_per_pixel_at_reference": round(cm_per_px, 4),
+        "measurements": results,
+        "warnings": warnings,
+        "ease_status": ease_table.get("_status", ""),
+    }

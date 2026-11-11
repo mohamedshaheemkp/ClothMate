@@ -1,30 +1,132 @@
 {
   "id": "womens_kurti",
   "gender": "women",
-  "category": "top_long",
+  "category": "top",
+  "display_name": "Women's kurti / kameez",
+  "ease_profile": "womens_kurti",
   "points": [
-    {"name": "shoulder_left",  "instruction": "Left outer shoulder seam end, where the sleeve joins the shoulder", "required": true},
-    {"name": "shoulder_right", "instruction": "Right outer shoulder seam end, where the sleeve joins the shoulder", "required": true},
-    {"name": "neck_shoulder",  "instruction": "Highest point of the shoulder seam next to the neck", "required": true},
-    {"name": "bust_left",      "instruction": "Left armpit seam, where the sleeve meets the body", "required": true},
-    {"name": "bust_right",     "instruction": "Right armpit seam, where the sleeve meets the body", "required": true},
-    {"name": "waist_left",     "instruction": "Left side seam at the narrowest point of the body (skip if the kurti is straight cut)", "required": false},
-    {"name": "waist_right",    "instruction": "Right side seam at the same height as waist_left", "required": false},
-    {"name": "hip_left",       "instruction": "Left side seam at the widest point below the waist (skip if the kurti is straight cut)", "required": false},
-    {"name": "hip_right",      "instruction": "Right side seam at the same height as hip_left", "required": false},
-    {"name": "hem_left",       "instruction": "Left bottom corner of the hem", "required": true},
-    {"name": "hem_right",      "instruction": "Right bottom corner of the hem", "required": true},
-    {"name": "hem_center",     "instruction": "Bottom hem, straight below the neck_shoulder point", "required": true},
-    {"name": "sleeve_end",     "instruction": "End of the sleeve at the cuff edge, on the outer side (skip for sleeveless)", "required": false}
+    {
+      "name": "shoulder_left",
+      "instruction": "Left outer shoulder point: where the shoulder seam meets the sleeve",
+      "required": true
+    },
+    {
+      "name": "shoulder_right",
+      "instruction": "Right outer shoulder point: where the shoulder seam meets the sleeve",
+      "required": true
+    },
+    {
+      "name": "neck_shoulder",
+      "instruction": "Highest point of the shoulder seam, right next to the collar/neckline (left side)",
+      "required": true
+    },
+    {
+      "name": "hem_center",
+      "instruction": "Bottom hem, in a straight line below the neck_shoulder point",
+      "required": true
+    },
+    {
+      "name": "chest_left",
+      "instruction": "Left armpit: where the sleeve seam meets the side seam",
+      "required": true
+    },
+    {
+      "name": "chest_right",
+      "instruction": "Right armpit: where the sleeve seam meets the side seam",
+      "required": true
+    },
+    {
+      "name": "waist_left",
+      "instruction": "Left side seam at waist level (narrowest part; for straight garments halfway between armpit and hem)",
+      "required": true
+    },
+    {
+      "name": "waist_right",
+      "instruction": "Right side seam at the same height as waist_left",
+      "required": true
+    },
+    {
+      "name": "hip_left",
+      "instruction": "Left side seam at hip level, about 18-20 cm below the waist point (widest part below the waist)",
+      "required": true
+    },
+    {
+      "name": "hip_right",
+      "instruction": "Right side seam at the same height as hip_left",
+      "required": true
+    },
+    {
+      "name": "hem_left",
+      "instruction": "Left bottom corner of the hem",
+      "required": true
+    },
+    {
+      "name": "hem_right",
+      "instruction": "Right bottom corner of the hem",
+      "required": true
+    },
+    {
+      "name": "sleeve_end",
+      "instruction": "Left sleeve: outer corner of the cuff / sleeve end (skip if sleeveless)",
+      "required": false
+    }
   ],
   "measurements": [
-    {"name": "shoulder",     "from": "shoulder_left", "to": "shoulder_right", "circumference": false},
-    {"name": "bust_width",   "from": "bust_left",     "to": "bust_right",     "circumference": true},
-    {"name": "waist_width",  "from": "waist_left",    "to": "waist_right",    "circumference": true},
-    {"name": "hip_width",    "from": "hip_left",      "to": "hip_right",      "circumference": true},
-    {"name": "hem_sweep",    "from": "hem_left",      "to": "hem_right",      "circumference": true},
-    {"name": "length",       "from": "neck_shoulder", "to": "hem_center",     "circumference": false},
-    {"name": "sleeve_length","from": "shoulder_right","to": "sleeve_end",     "circumference": false}
-  ],
-  "ease_cm": {"slim": null, "regular": null, "loose": null}
+    {
+      "name": "shoulder",
+      "from": "shoulder_left",
+      "to": "shoulder_right",
+      "kind": "straight",
+      "tailor_measure": "Shoulder width",
+      "ease_key": null
+    },
+    {
+      "name": "bust",
+      "from": "chest_left",
+      "to": "chest_right",
+      "kind": "flat_circumference",
+      "tailor_measure": "Bust",
+      "ease_key": "bust"
+    },
+    {
+      "name": "waist",
+      "from": "waist_left",
+      "to": "waist_right",
+      "kind": "flat_circumference",
+      "tailor_measure": "Waist",
+      "ease_key": "waist"
+    },
+    {
+      "name": "hip",
+      "from": "hip_left",
+      "to": "hip_right",
+      "kind": "flat_circumference",
+      "tailor_measure": "Hip",
+      "ease_key": "hip"
+    },
+    {
+      "name": "hem_sweep",
+      "from": "hem_left",
+      "to": "hem_right",
+      "kind": "flat_circumference",
+      "tailor_measure": "Hem sweep (garment only)",
+      "ease_key": null
+    },
+    {
+      "name": "length",
+      "from": "neck_shoulder",
+      "to": "hem_center",
+      "kind": "straight",
+      "tailor_measure": "Garment length",
+      "ease_key": null
+    },
+    {
+      "name": "sleeve_length",
+      "from": "shoulder_left",
+      "to": "sleeve_end",
+      "kind": "straight",
+      "tailor_measure": "Sleeve length",
+      "ease_key": null
+    }
+  ]
 }

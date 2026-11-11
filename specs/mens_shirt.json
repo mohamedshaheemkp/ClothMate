@@ -1,0 +1,114 @@
+{
+  "id": "mens_shirt",
+  "gender": "men",
+  "category": "top",
+  "display_name": "Men's formal / casual shirt",
+  "ease_profile": "woven_shirt",
+  "points": [
+    {
+      "name": "shoulder_left",
+      "instruction": "Left outer shoulder point: where the shoulder seam meets the sleeve",
+      "required": true
+    },
+    {
+      "name": "shoulder_right",
+      "instruction": "Right outer shoulder point: where the shoulder seam meets the sleeve",
+      "required": true
+    },
+    {
+      "name": "neck_shoulder",
+      "instruction": "Highest point of the shoulder seam, right next to the collar/neckline (left side)",
+      "required": true
+    },
+    {
+      "name": "hem_center",
+      "instruction": "Bottom hem, in a straight line below the neck_shoulder point",
+      "required": true
+    },
+    {
+      "name": "chest_left",
+      "instruction": "Left armpit: where the sleeve seam meets the side seam",
+      "required": true
+    },
+    {
+      "name": "chest_right",
+      "instruction": "Right armpit: where the sleeve seam meets the side seam",
+      "required": true
+    },
+    {
+      "name": "waist_left",
+      "instruction": "Left side seam at waist level (narrowest part; for straight garments halfway between armpit and hem)",
+      "required": true
+    },
+    {
+      "name": "waist_right",
+      "instruction": "Right side seam at the same height as waist_left",
+      "required": true
+    },
+    {
+      "name": "hem_left",
+      "instruction": "Left bottom corner of the hem",
+      "required": true
+    },
+    {
+      "name": "hem_right",
+      "instruction": "Right bottom corner of the hem",
+      "required": true
+    },
+    {
+      "name": "sleeve_end",
+      "instruction": "Left sleeve: outer corner of the cuff / sleeve end (skip if sleeveless)",
+      "required": false
+    }
+  ],
+  "measurements": [
+    {
+      "name": "shoulder",
+      "from": "shoulder_left",
+      "to": "shoulder_right",
+      "kind": "straight",
+      "tailor_measure": "Shoulder width",
+      "ease_key": null
+    },
+    {
+      "name": "chest",
+      "from": "chest_left",
+      "to": "chest_right",
+      "kind": "flat_circumference",
+      "tailor_measure": "Chest",
+      "ease_key": "chest"
+    },
+    {
+      "name": "waist",
+      "from": "waist_left",
+      "to": "waist_right",
+      "kind": "flat_circumference",
+      "tailor_measure": "Waist",
+      "ease_key": "waist"
+    },
+    {
+      "name": "hip_at_hem",
+      "from": "hem_left",
+      "to": "hem_right",
+      "kind": "flat_circumference",
+      "tailor_measure": "Hip (approx., at hem)",
+      "ease_key": "hip"
+    },
+    {
+      "name": "length",
+      "from": "neck_shoulder",
+      "to": "hem_center",
+      "kind": "straight",
+      "tailor_measure": "Garment length",
+      "ease_key": null
+    },
+    {
+      "name": "sleeve_length",
+      "from": "shoulder_left",
+      "to": "sleeve_end",
+      "kind": "straight",
+      "tailor_measure": "Sleeve length",
+      "ease_key": null
+    }
+  ]
+}

@@ -1,0 +1,83 @@
+{
+  "id": "womens_skirt",
+  "gender": "women",
+  "category": "bottom",
+  "display_name": "Women's skirt",
+  "ease_profile": "skirt",
+  "points": [
+    {
+      "name": "waist_left",
+      "instruction": "Left end of the top edge of the waistband",
+      "required": true
+    },
+    {
+      "name": "waist_right",
+      "instruction": "Right end of the top edge of the waistband",
+      "required": true
+    },
+    {
+      "name": "waistband_center",
+      "instruction": "Centre of the top edge of the waistband",
+      "required": true
+    },
+    {
+      "name": "hip_left",
+      "instruction": "Left side seam, about 18-20 cm below the waistband (widest part of the hip)",
+      "required": true
+    },
+    {
+      "name": "hip_right",
+      "instruction": "Right side seam at the same height as hip_left",
+      "required": true
+    },
+    {
+      "name": "hem_left",
+      "instruction": "Left bottom corner of the hem",
+      "required": true
+    },
+    {
+      "name": "hem_right",
+      "instruction": "Right bottom corner of the hem",
+      "required": true
+    },
+    {
+      "name": "hem_center",
+      "instruction": "Bottom hem, straight below waistband_center",
+      "required": true
+    }
+  ],
+  "measurements": [
+    {
+      "name": "waist",
+      "from": "waist_left",
+      "to": "waist_right",
+      "kind": "flat_circumference",
+      "tailor_measure": "Waist",
+      "ease_key": "waist"
+    },
+    {
+      "name": "hip",
+      "from": "hip_left",
+      "to": "hip_right",
+      "kind": "flat_circumference",
+      "tailor_measure": "Hip",
+      "ease_key": "hip"
+    },
+    {
+      "name": "hem_sweep",
+      "from": "hem_left",
+      "to": "hem_right",
+      "kind": "flat_circumference",
+      "tailor_measure": "Hem sweep (garment only)",
+      "ease_key": null
+    },
+    {
+      "name": "length",
+      "from": "waistband_center",
+      "to": "hem_center",
+      "kind": "straight",
+      "tailor_measure": "Skirt length",
+      "ease_key": null
+    }
+  ]
+}

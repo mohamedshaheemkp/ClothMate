@@ -1,0 +1,132 @@
+{
+  "id": "womens_blouse",
+  "gender": "women",
+  "category": "top",
+  "display_name": "Women's blouse",
+  "ease_profile": "blouse",
+  "points": [
+    {
+      "name": "shoulder_left",
+      "instruction": "Left outer shoulder point: where the shoulder seam meets the sleeve",
+      "required": true
+    },
+    {
+      "name": "shoulder_right",
+      "instruction": "Right outer shoulder point: where the shoulder seam meets the sleeve",
+      "required": true
+    },
+    {
+      "name": "neck_shoulder",
+      "instruction": "Top of the shoulder at the neck joint (left side)",
+      "required": true
+    },
+    {
+      "name": "shoulder_mid",
+      "instruction": "Middle of the left shoulder seam, halfway between neck and shoulder end",
+      "required": true
+    },
+    {
+      "name": "hem_below_shoulder_mid",
+      "instruction": "Bottom hem, straight below shoulder_mid",
+      "required": true
+    },
+    {
+      "name": "neck_front_lowest",
+      "instruction": "Lowest point of the front neckline, in the centre",
+      "required": true
+    },
+    {
+      "name": "chest_left",
+      "instruction": "Left armpit: where the sleeve seam meets the side seam",
+      "required": true
+    },
+    {
+      "name": "chest_right",
+      "instruction": "Right armpit: where the sleeve seam meets the side seam",
+      "required": true
+    },
+    {
+      "name": "hem_left",
+      "instruction": "Left bottom corner of the hem",
+      "required": true
+    },
+    {
+      "name": "hem_right",
+      "instruction": "Right bottom corner of the hem",
+      "required": true
+    },
+    {
+      "name": "sleeve_end",
+      "instruction": "Left sleeve: outer corner of the cuff / sleeve end (skip if sleeveless)",
+      "required": false
+    },
+    {
+      "name": "arm_a",
+      "instruction": "Left sleeve: one edge, about 2.5 cm below the armpit, across the sleeve",
+      "required": false
+    },
+    {
+      "name": "arm_b",
+      "instruction": "Left sleeve: the opposite edge at the same level as arm_a",
+      "required": false
+    }
+  ],
+  "measurements": [
+    {
+      "name": "shoulder",
+      "from": "shoulder_left",
+      "to": "shoulder_right",
+      "kind": "straight",
+      "tailor_measure": "Shoulder width",
+      "ease_key": null
+    },
+    {
+      "name": "bust",
+      "from": "chest_left",
+      "to": "chest_right",
+      "kind": "flat_circumference",
+      "tailor_measure": "Bust",
+      "ease_key": "bust"
+    },
+    {
+      "name": "above_waist",
+      "from": "hem_left",
+      "to": "hem_right",
+      "kind": "flat_circumference",
+      "tailor_measure": "Around above waist",
+      "ease_key": "waist"
+    },
+    {
+      "name": "blouse_length",
+      "from": "shoulder_mid",
+      "to": "hem_below_shoulder_mid",
+      "kind": "straight",
+      "tailor_measure": "Blouse length (from shoulder centre)",
+      "ease_key": null
+    },
+    {
+      "name": "front_neck_depth",
+      "from": "neck_shoulder",
+      "to": "neck_front_lowest",
+      "kind": "straight",
+      "tailor_measure": "Front neck depth",
+      "ease_key": null
+    },
+    {
+      "name": "sleeve_length",
+      "from": "shoulder_left",
+      "to": "sleeve_end",
+      "kind": "straight",
+      "tailor_measure": "Sleeve length",
+      "ease_key": null
+    },
+    {
+      "name": "arm_round",
+      "from": "arm_a",
+      "to": "arm_b",
+      "kind": "flat_circumference",
+      "tailor_measure": "Around arm",
+      "ease_key": "arm"
+    }
+  ]
+}
