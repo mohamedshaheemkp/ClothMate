@@ -100,6 +100,6 @@ def measure(req: MeasureRequest):
                                  fit=req.fit, reference=req.reference)
     except ValueError as exc:  # our own messages, safe to show
         raise HTTPException(status_code=422, detail=str(exc))
-    result["method"] = "scale"
+    result["method"] = "homography"
     log.info("measured garment=%s role=%s", req.garment_id, req.user_role)
     return result

@@ -67,3 +67,7 @@ def test_bad_garment_id_characters_are_422():
     body = good_request()
     body["garment_id"] = "../secret"
     assert client.post("/v1/measure", json=body).status_code == 422
+
+def test_response_says_which_method_was_used():
+    response = client.post("/v1/measure", json=good_request())
+    assert response.json()["method"] == "homography"
