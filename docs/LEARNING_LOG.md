@@ -4,7 +4,9 @@ Format: concept — one-line plain explanation — where it is in the code
 - Homography — maps a tilted photo plane to a flat real-world plane using 4 known points — python core/geometry
 - Hartley normalization — rescales points before computing homography so the math is stable — core
 - REST API — frontend asks backend using URLs + JSON — Spring controllers
-- (add more every session)
+- Ground Truth Validation — testing software measurements against a physical tape measure before training ML models — testing/accuracy
+- Keypoint Detection — ML task predicting exact coordinates of landmark points (shoulders, collar, hem) — future CV pipeline
+- TestBed — Angular testing utility that creates an isolated mock browser environment to instantiate components without a real browser — clothmate-web/src/app/app.spec.ts
 
 ## Questions I should be able to answer
 1. Why does the bank card give scale? What goes wrong if the card is tilted?

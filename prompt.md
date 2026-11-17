@@ -1,1 +1,0 @@
-so now , i want to setup the plan and analyse it properly , set a visual structure or a plan , and what it is uses and its goal is , i want to make sure im moving in the right direction and also , tweak the way forward properly , so we reach the conclusion as better as possible
